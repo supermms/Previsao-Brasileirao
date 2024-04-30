@@ -72,7 +72,7 @@ st.markdown("""<p class="show-on-cel" style='text-align: center; display:none; c
 st.markdown("<h2 style='text-align: center;'>Tabela Atual</h2>", unsafe_allow_html=True)
 
 tabela_atual = pd.read_csv("./classificacao.csv", sep=';')
-st.dataframe(tabela_atual[['#','Equipe', 'J','V', 'P', 'SG', 'GP']].set_index('#'), use_container_width=True)#.style.hide())
+st.dataframe(tabela_atual[['#','Equipe', 'P', 'J','V', 'SG', 'GP']].set_index('#'), use_container_width=True)#.style.hide())
 
 st.divider()
 
