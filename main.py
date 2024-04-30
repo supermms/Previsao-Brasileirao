@@ -208,7 +208,10 @@ team1_camp = st.selectbox('Selecione a Equipe:', equipes, key='sbteam1camp')
 p1 = df_prev_posicoes.loc[team1_camp, 1]
 
 st.markdown(f"<p style='text-align: center;'>A probabilidade do <b>{team1_camp}</b> ser campeão é de {p1*100:.2f}%</p>", unsafe_allow_html=True)
-st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_camp}</b> ser campeão é de {1/p1:.2f}</p>", unsafe_allow_html=True)
+if p1 > 0.00:
+    st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_camp}</b> ser campeão é de {1/p1:.2f}</p>", unsafe_allow_html=True)
+else:
+    st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_camp}</b> ser campeão é de infinito</p>", unsafe_allow_html=True)
 st.write('')
 
 st.divider()
@@ -249,6 +252,10 @@ st.markdown("<p style='text-align: center;'>Verifique a probabilidade de uma equ
 
 team1_z4 = st.selectbox('Selecione a Equipe:', equipes, key='sbz4')
 z4_prob = checkZ4(team1_z4, df_prev_posicoes)
+
 st.markdown(f"<p style='text-align: center;'>A probabilidade do <b>{team1_z4}</b> terminar no Z4 é de <b>{z4_prob*100:.2f}%</b></p>", unsafe_allow_html=True)
-st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_z4}</b> terminar no Z4 é de  <b>{1/z4_prob:.2f}</b></p>", unsafe_allow_html=True)
+if z4_prob > 0.00:
+    st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_z4}</b> terminar no Z4 é de <b>{1/z4_prob:.2f}</b></p>", unsafe_allow_html=True)
+else:
+    st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_z4}</b> terminar no Z4 é de infinito</b></p>", unsafe_allow_html=True)
 
