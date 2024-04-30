@@ -200,6 +200,19 @@ st.dataframe(df_percentages)
 
 st.divider()
 
+st.markdown("<h3 style='text-align: center;'>Campeão</h3>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>Verifique a probabilidade de uma equipe ser campeã</p>", unsafe_allow_html=True)
+
+equipes = [e for e in df_prev_posicoes.index.to_list()]
+team1_camp = st.selectbox('Selecione a Equipe:', equipes, key='sbteam1camp')
+p1 = df_prev_posicoes.loc[team1_camp, 1]
+
+st.markdown(f"<p style='text-align: center;'>A probabilidade do <b>{team1_camp}</b> ser campeão é de {p1*100:.2f}%</p>", unsafe_allow_html=True)
+st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_camp}</b> ser campeão é de {1/p1:.2f}</p>", unsafe_allow_html=True)
+st.write('')
+
+st.divider()
+
 st.markdown("<h3 style='text-align: center;'>Head-to-Head</h3>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center;'>Verifique a probabilidade de uma equipe terminar acima da outra</p>", unsafe_allow_html=True)
 
@@ -210,10 +223,10 @@ team2_h2h = col2.selectbox('Selecione a Equipe 2:', equipes, key='sbteam2g4')
 p1, p2 = checkH2H(team1_h2h, team2_h2h, df_prev_posicoes)
 
 st.markdown(f"<p style='text-align: center;'>A probabilidade do <b>{team1_h2h}</b> terminar acima do <b>{team2_h2h}</b> é de {p1*100:.2f}%</p>", unsafe_allow_html=True)
-st.markdown(f"<p style='text-align: center;'>As odds para <b>{team1_h2h}</b> terminar acima do <b>{team2_h2h}</b> é de {1/p1:.2f}</p>", unsafe_allow_html=True)
+st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_h2h}</b> terminar acima do <b>{team2_h2h}</b> é de {1/p1:.2f}</p>", unsafe_allow_html=True)
 st.write('')
 st.markdown(f"<p style='text-align: center;'>A probabilidade do <b>{team2_h2h}</b> terminar acima do <b>{team1_h2h}</b> é de {p2*100:.2f}%</p>", unsafe_allow_html=True)
-st.markdown(f"<p style='text-align: center;'>As odds para <b>{team2_h2h}</b> terminar acima do <b>{team1_h2h}</b> é de {1/p2:.2f}</p>", unsafe_allow_html=True)
+st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team2_h2h}</b> terminar acima do <b>{team1_h2h}</b> é de {1/p2:.2f}</p>", unsafe_allow_html=True)
 
 st.divider()
 
