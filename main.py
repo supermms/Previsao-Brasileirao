@@ -259,3 +259,10 @@ if z4_prob > 0.00:
 else:
     st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_z4}</b> terminar no Z4 é de infinito</b></p>", unsafe_allow_html=True)
 
+
+st.divider()
+st.markdown("""<p style='text-align: center;'>Desenvolvido por <a href='https://linkedin.com/in/matheusmsa'>Matheus Sá</a></p>""", unsafe_allow_html=True)
+st.markdown("""<p style='text-align: center;'>Quer ajudar o projeto? Considere apoiar o desenvolvimento me pagando um cafézinho <a href='https://nubank.com.br/pagar/30c23/Xvbp895w2O'>via Pix</a></p>""", unsafe_allow_html=True)
+st.markdown("""<a id="copy-code" class="copy-button copy-icon db tc no-underline br3 fw6 ttu ttn-ns" data-clipboard-text="00020126950014BR.GOV.BCB.PIX0136e8ef6f0c-2db5-4008-af3a-17f38c81c85c0233Obrigado por apoiar meu trabalho!5204000053039865802BR5917MATHEUS MORENO SA6009SAO PAULO61080540900062240520o9bsntFvnPHTXlX30c236304594C">Copiar código do QR Code</a>""", unsafe_allow_html=True)
+
+
