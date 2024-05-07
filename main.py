@@ -65,7 +65,7 @@ with open( "style.css" ) as css:
 
 
 st.markdown("<h1 style='text-align: center;'>Previsão Brasileirão</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center;'>Estudo utilizando IA para previsão da Série A do Campeonato Brasileiro</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>Estudo utilizando Machine Learning para previsão da Série A do Campeonato Brasileiro</p>", unsafe_allow_html=True)
 #st.markdown("""<p class="show-on-cel" style='text-align: center; display:none; color:#FC8181;"'>Esta aplicação não é responsiva para celulares. Selecione a versão para computador para ter uma melhor experiência.</p>""", unsafe_allow_html=True)
 
 
