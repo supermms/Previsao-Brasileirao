@@ -88,8 +88,8 @@ for index, row in tabela_partidas.iterrows():
     awayteam = tabela_partidas.loc[index, 'Away']
     PRHome = powerRanking[powerRanking['Equipe'] == hometeam][['PowerRanking']].iloc[0,0]
     PRAway = powerRanking[powerRanking['Equipe'] == awayteam][['PowerRanking']].iloc[0,0]
-    tabela_partidas.loc[index, 'OddH'] = 0.465 - (PRHome - PRAway)*0.035
-    tabela_partidas.loc[index, 'OddD'] = 0.3 - ((tabela_partidas.loc[index, 'OddH']-0.33)/6)
+    tabela_partidas.loc[index, 'OddH'] = 0.462 - (PRHome - PRAway)*0.033
+    tabela_partidas.loc[index, 'OddD'] = 0.3 - ((tabela_partidas.loc[index, 'OddH']-0.59)/6)
     tabela_partidas.loc[index, 'OddA'] = 1 - tabela_partidas.loc[index, 'OddH'] - tabela_partidas.loc[index, 'OddD']
 
 
