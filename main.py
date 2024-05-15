@@ -7,6 +7,9 @@ from datetime import datetime
 import random
 import seaborn as sns
 
+st.set_page_config(
+        page_title="Previsão Brasileirão",
+)
 
 apply_update = False
 
