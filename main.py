@@ -25,6 +25,9 @@ custom_html = """
 </html>
 """
 
+# Embed the custom HTML into the Streamlit app
+components.html(custom_html, height=0)
+
 
 
 apply_update = False
