@@ -6,10 +6,26 @@ import re
 from datetime import datetime
 import random
 import seaborn as sns
+import streamlit.components.v1 as components
 
 st.set_page_config(
         page_title="Previsão Brasileirão",
 )
+
+# Custom HTML to include meta tags
+custom_html = """
+<html>
+  <head>
+    <meta property="og:title" content="Custom Title for Your App">
+    <meta property="og:description" content="Custom description that you want to appear when the link is shared on social media.">
+    <meta property="og:image" content="URL_to_image_to_display">
+    <meta property="og:url" content="https://previsao-brasileirao.streamlit.app/">
+    <title>Custom Page Title</title>
+  </head>
+</html>
+"""
+
+
 
 apply_update = False
 
