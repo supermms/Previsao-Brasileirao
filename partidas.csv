@@ -32,7 +32,7 @@
 4;Vasco;Criciúma;Sim;A;;;
 4;Cuiabá;Atlético-MG;Sim;A;;;
 4;Bahia;Grêmio;Sim;H;;;
-4;Flamengo;Botafogo;Não;A;;;
+4;Flamengo;Botafogo;Sim;A;;;
 4;Corinthians;Fluminense;Sim;H;;;
 4;Cruzeiro;Vitória;Sim;H;;;
 4;Fortaleza;Bragantino;Sim;D;;;
@@ -50,7 +50,7 @@
 5;Cuiabá;Palmeiras;Sim;A;;;
 5;Botafogo;Bahia;Sim;A;;;
 6;Flamengo;Corinthians;Sim;H;;;
-6;Criciúma;Cuiabá;Não;;;;
+6;Criciúma;Cuiabá;Sim;A;;;
 6;Atlético-MG;Grêmio;Não;;;;
 6;Vasco;Vitória;Sim;H;;;
 6;Palmeiras;Athlético-PR;Sim;A;;;
@@ -70,11 +70,11 @@
 7;Grêmio;Bragantino;Sim;D;;;
 7;Cuiabá;Internacional;Sim;A;;;
 8;Flamengo;Grêmio;Não;;;;
-8;Botafogo;Fluminense;Não;;;;
-8;Atlético-GO;Corinthians;Não;;;;
-8;Bragantino;Atlético-MG;Não;;;;
+8;Botafogo;Fluminense;Sim;H;;;
+8;Atlético-GO;Corinthians;Sim;D;;;
+8;Bragantino;Atlético-MG;Sim;A;;;
 8;Internacional;São Paulo;Não;;;;
-8;Juventude;Vitória;Não;;;;
+8;Juventude;Vitória;Sim;D;;;
 8;Palmeiras;Vasco;Não;;;;
 8;Bahia;Fortaleza;Não;;;;
 8;Cruzeiro;Cuiabá;Não;;;;
