@@ -32,7 +32,7 @@ components.html(custom_html, height=0)
 
 apply_update = False
 
-def checkH2H(t1, t2, df_prev_posicoes):
+def checkH2H(t1, t2, df_prev_posicoses):
     sum_pct_t1 = 0.00
     sum_pct_t2 = 0.00 
     for i in range(20):
