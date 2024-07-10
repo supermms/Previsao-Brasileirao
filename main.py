@@ -149,6 +149,28 @@ dict_posicoes = {"Athlético-PR":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
                  "Vitória": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
                  }
 
+dict_pontos = {"Athlético-PR":[100,0],
+                 "Atlético-MG": [100,0],
+                 "Atlético-GO": [100,0],
+                 "Bahia":[100,0],
+                 "Botafogo": [100,0],
+                 "Bragantino": [100,0],
+                 "Corinthians": [100,0],
+                 "Criciúma":[100,0],
+                 "Cruzeiro": [100,0],
+                 "Cuiabá":[100,0],
+                 "Flamengo": [100,0],
+                 "Fluminense":[100,0],
+                 "Fortaleza": [100,0],
+                 "Grêmio":[100,0],
+                 "Internacional": [100,0],
+                 "Juventude":[100,0],
+                 "Palmeiras": [100,0],
+                 "São Paulo": [100,0],
+                 "Vasco": [100,0],
+                 "Vitória": [100,0],
+                 }
+
 if apply_update:
     n_sims = 10000
     for x in range(n_sims):
@@ -185,6 +207,11 @@ if apply_update:
             #st.write(f"{row['Equipe']} ficou em {row['#']}")
             dict_posicoes[row['Equipe']][row['#']-1] += 1
 
+            if row['P'] > dict_pontos[row['Equipe']][1]:
+                dict_pontos[row['Equipe']][1] = row['P']
+            if row['P'] < dict_pontos[row['Equipe']][0]:
+                dict_pontos[row['Equipe']][0] = row['P']
+
     dict_posicoes_rel = {}
     for key in dict_posicoes:
         dict_posicoes_rel[key] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -201,6 +228,11 @@ if apply_update:
                                     10:11, 11:12, 12:13, 13:14, 14:15, 15:16, 16:17,
                                     17:18, 18:19, 19:20}, inplace=True)
 
+    #Criar dataframe por pontos
+    df_prev_pontos = pd.DataFrame(dict_pontos).T
+    df_prev_pontos.to_csv('prev_pontos.csv')
+    df_prev_pontos.rename(columns={0:'Min', 1:'Max'}, inplace=True)
+
     st.markdown("<h2 style='text-align: center;'>Previsões</h2>", unsafe_allow_html=True)
     st.write("")
     st.markdown("<h3 style='text-align: center;'>Previsão por posição</h3>", unsafe_allow_html=True)
@@ -211,6 +243,8 @@ if apply_update:
     df_prev_posicoes = df_prev_posicoes.sort_values(1, ascending=False)
     df_prev_posicoes.to_csv('prev_posicoes.csv')
 else:
+    df_prev_pontos = pd.read_csv('prev_pontos.csv', index_col=0)
+
     df_prev_posicoes = pd.read_csv('prev_posicoes.csv', index_col=0)
     df_prev_posicoes.columns = df_prev_posicoes.columns.astype(int)
 
@@ -235,6 +269,17 @@ if p1 > 0.00:
 else:
     st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_camp}</b> ser campeão é de infinito</p>", unsafe_allow_html=True)
 st.write('')
+
+st.divider()
+
+st.markdown("<h3 style='text-align: center;'>Faixa de Pontos</h3>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>Verifique a faixa provável de pontos que a equipe vai terminar o campeonato</p>", unsafe_allow_html=True)
+
+equipes = [e for e in df_prev_posicoes.index.to_list()]
+team1_pontos = st.selectbox('Selecione a Equipe:', equipes, key='sbteam1pontos')
+p1, p2 = df_prev_pontos.loc[team1_pontos, 'Min'], df_prev_pontos.loc[team1_pontos, 'Max']
+
+st.markdown(f"<p style='text-align: center;'>A faixa de pontuação do <b>{team1_pontos}</b> vai variar entre <b>{p1}</b> e <b>{p2}</b></p>", unsafe_allow_html=True)
 
 st.divider()
 
