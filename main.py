@@ -322,11 +322,25 @@ team1_h2h = col1.selectbox('Selecione a Equipe 1:', equipes, key='sbteam1g4')
 team2_h2h = col2.selectbox('Selecione a Equipe 2:', equipes, key='sbteam2g4')
 p1, p2 = checkH2H(team1_h2h, team2_h2h, df_prev_posicoes)
 
-st.markdown(f"<p style='text-align: center;'>A probabilidade do <b>{team1_h2h}</b> terminar acima do <b>{team2_h2h}</b> é de {p1*100:.2f}%</p>", unsafe_allow_html=True)
-st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_h2h}</b> terminar acima do <b>{team2_h2h}</b> é de {1/p1:.2f}</p>", unsafe_allow_html=True)
-st.write('')
-st.markdown(f"<p style='text-align: center;'>A probabilidade do <b>{team2_h2h}</b> terminar acima do <b>{team1_h2h}</b> é de {p2*100:.2f}%</p>", unsafe_allow_html=True)
-st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team2_h2h}</b> terminar acima do <b>{team1_h2h}</b> é de {1/p2:.2f}</p>", unsafe_allow_html=True)
+if (p1 > 0) and (p2 > 0):
+    st.markdown(f"<p style='text-align: center;'>A probabilidade do <b>{team1_h2h}</b> terminar acima do <b>{team2_h2h}</b> é de {p1*100:.2f}%</p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_h2h}</b> terminar acima do <b>{team2_h2h}</b> é de {1/p1:.2f}</p>", unsafe_allow_html=True)
+    st.write('')
+    st.markdown(f"<p style='text-align: center;'>A probabilidade do <b>{team2_h2h}</b> terminar acima do <b>{team1_h2h}</b> é de {p2*100:.2f}%</p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team2_h2h}</b> terminar acima do <b>{team1_h2h}</b> é de {1/p2:.2f}</p>", unsafe_allow_html=True)
+else:
+    if p1 == 0:
+        st.markdown(f"<p style='text-align: center;'>A probabilidade do <b>{team1_h2h}</b> terminar acima do <b>{team2_h2h}</b> é de {p1*100:.2f}%</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_h2h}</b> terminar acima do <b>{team2_h2h}</b> é de infinito</p>", unsafe_allow_html=True)
+        st.write('')
+        st.markdown(f"<p style='text-align: center;'>A probabilidade do <b>{team2_h2h}</b> terminar acima do <b>{team1_h2h}</b> é de {p2*100:.2f}%</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team2_h2h}</b> terminar acima do <b>{team1_h2h}</b> é de {1/p2:.2f}</p>", unsafe_allow_html=True)
+    elif p2 == 0:
+        st.markdown(f"<p style='text-align: center;'>A probabilidade do <b>{team1_h2h}</b> terminar acima do <b>{team2_h2h}</b> é de {p1*100:.2f}%</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_h2h}</b> terminar acima do <b>{team2_h2h}</b> é de {1/p1:.2f}</p>", unsafe_allow_html=True)
+        st.write('')
+        st.markdown(f"<p style='text-align: center;'>A probabilidade do <b>{team2_h2h}</b> terminar acima do <b>{team1_h2h}</b> é de {p2*100:.2f}%</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team2_h2h}</b> terminar acima do <b>{team1_h2h}</b> é de infinito</p>", unsafe_allow_html=True)
 
 st.divider()
 
@@ -336,12 +350,20 @@ st.markdown("<p style='text-align: center;'>Verifique a probabilidade de uma equ
 team1_g4g6 = st.selectbox('Selecione a Equipe:', equipes)
 g4_prob = checkG4(team1_g4g6, df_prev_posicoes)
 g6_prob = checkG6(team1_g4g6, df_prev_posicoes)
-st.markdown(f"<p style='text-align: center;'>A probabilidade do <b>{team1_g4g6}</b> terminar no G4 é de <b>{g4_prob*100:.2f}%</b></p>", unsafe_allow_html=True)
-st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_g4g6}</b> terminar no G4 é de  <b>{1/g4_prob:.2f}</b></p>", unsafe_allow_html=True)
-st.write('')
-st.markdown(f"<p style='text-align: center;'>A probabilidade do <b>{team1_g4g6}</b> terminar no G6 é de <b>{g6_prob*100:.2f}%</b></p>", unsafe_allow_html=True)
-st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_g4g6}</b> terminar no G6 é de  <b>{1/g6_prob:.2f}</b></p>", unsafe_allow_html=True)
 
+
+st.markdown(f"<p style='text-align: center;'>A probabilidade do <b>{team1_g4g6}</b> terminar no G4 é de <b>{g4_prob*100:.2f}%</b></p>", unsafe_allow_html=True)
+if g4_prob > 0.00:
+    st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_g4g6}</b> terminar no G4 é de <b>{1/g4_prob:.2f}</b></p>", unsafe_allow_html=True)
+else:
+    st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_g4g6}</b> terminar no G4 é de infinito</p>", unsafe_allow_html=True)
+st.write('')
+
+st.markdown(f"<p style='text-align: center;'>A probabilidade do <b>{team1_g4g6}</b> terminar no G6 é de <b>{g6_prob*100:.2f}%</b></p>", unsafe_allow_html=True)
+if g6_prob > 0.00:
+    st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_g4g6}</b> terminar no G6 é de <b>{1/g6_prob:.2f}</b></p>", unsafe_allow_html=True)
+else:
+    st.markdown(f"<p style='text-align: center;'>A cotação justa para o <b>{team1_g4g6}</b> terminar no G6 é de infinito</p>", unsafe_allow_html=True)
 st.divider()
 
 st.markdown("<h3 style='text-align: center;'>Z4</h3>", unsafe_allow_html=True)
