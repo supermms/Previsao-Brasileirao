@@ -8,6 +8,8 @@ import random
 import seaborn as sns
 import streamlit.components.v1 as components
 
+apply_update = False
+
 st.set_page_config(
         page_title="Previsão Brasileirão",
 )
@@ -30,7 +32,6 @@ components.html(custom_html, height=0)
 
 
 
-apply_update = False
 
 def checkH2H(t1, t2, df_prev_posicoses):
     sum_pct_t1 = 0.00
@@ -60,6 +61,21 @@ def checkG6(team, df_prev_posicoes):
 def checkZ4(team, df_prev_posicoes):
     probs = sum([p for p in df_prev_posicoes.loc[team, 17:]])
     return probs
+
+
+def checkPointsRange(team, df_simulacoes):
+    probs = df_simulacoes[df_simulacoes[team] != 0][[team]]
+    lista = []
+    for index, row in probs.iterrows():
+        for i in range(row[team]):
+            lista.append(index)
+
+    percentil_25 = int(round(np.percentile(lista,2.5),0))
+    percentil_975 = int(round(np.percentile(lista,97.5),0))
+
+
+    return percentil_25, percentil_975
+    
 
 
 
@@ -171,8 +187,11 @@ dict_pontos = {"Athlético-PR":[100,0],
                  "Vitória": [100,0],
                  }
 
+#Dataframe para guardar a qtd de pontos dos times em cada simulacao
+df_simulacoes = pd.DataFrame(0, index=list(range(120)), columns=list(dict_pontos.keys()))
+
 if apply_update:
-    n_sims = 10000
+    n_sims = 10000  
     for x in range(n_sims):
         st.write(x)
         tabela_partidas[tabela_partidas['Jogado'] == 'Não']['Res'] = ''
@@ -207,6 +226,9 @@ if apply_update:
             #st.write(f"{row['Equipe']} ficou em {row['#']}")
             dict_posicoes[row['Equipe']][row['#']-1] += 1
 
+            q = df_simulacoes.loc[row['P'], row['Equipe']]
+            df_simulacoes.loc[row['P'], row['Equipe']] = q+1
+
             if row['P'] > dict_pontos[row['Equipe']][1]:
                 dict_pontos[row['Equipe']][1] = row['P']
             if row['P'] < dict_pontos[row['Equipe']][0]:
@@ -233,6 +255,8 @@ if apply_update:
     df_prev_pontos.to_csv('prev_pontos.csv')
     df_prev_pontos.rename(columns={0:'Min', 1:'Max'}, inplace=True)
 
+    df_simulacoes.to_csv('simulacoes.csv')
+
     st.markdown("<h2 style='text-align: center;'>Previsões</h2>", unsafe_allow_html=True)
     st.write("")
     st.markdown("<h3 style='text-align: center;'>Previsão por posição</h3>", unsafe_allow_html=True)
@@ -248,11 +272,17 @@ else:
     df_prev_posicoes = pd.read_csv('prev_posicoes.csv', index_col=0)
     df_prev_posicoes.columns = df_prev_posicoes.columns.astype(int)
 
+    df_simulacoes = pd.read_csv('simulacoes.csv', index_col=0)
+
 #df_percentages = df_prev_posicoes.style.background_gradient(cmap=cm)
 df_percentages = df_prev_posicoes.applymap(lambda x: '{:.2%}'.format(x))
 
 # Display the formatted DataFrame
 st.dataframe(df_percentages)
+
+
+
+
 
 st.divider()
 
@@ -277,7 +307,7 @@ st.markdown("<p style='text-align: center;'>Verifique a faixa provável de ponto
 
 equipes = [e for e in df_prev_posicoes.index.to_list()]
 team1_pontos = st.selectbox('Selecione a Equipe:', equipes, key='sbteam1pontos')
-p1, p2 = df_prev_pontos.loc[team1_pontos, 'Min'], df_prev_pontos.loc[team1_pontos, 'Max']
+p1, p2 = checkPointsRange(team1_pontos, df_simulacoes)
 
 st.markdown(f"<p style='text-align: center;'>A faixa de pontuação do <b>{team1_pontos}</b> vai variar entre <b>{p1}</b> e <b>{p2}</b></p>", unsafe_allow_html=True)
 
