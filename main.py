@@ -8,7 +8,7 @@ import random
 import seaborn as sns
 import streamlit.components.v1 as components
 
-apply_update = True
+apply_update = False
 
 st.set_page_config(
         page_title="Previsão Brasileirão",
